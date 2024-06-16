@@ -8,14 +8,41 @@
   <link rel="stylesheet" href="./styles/main.css">
   <script src="./libs/p5.min.js"></script>
   <script src="./scripts/automaton.js"></script>
+  <script src="./scripts/helpers.js"></script>
+  <script src="./scripts/selection-form.js" defer></script>
 </head>
 
 <body>
   <header class="header">
-    <h1>Elementary cellular automaton example</h1>
+    <h1>
+      Elementary cellular automaton example
+    </h1>
   </header>
   <main class="main">
-    <canvas id="automaton-canvas"></canvas>
+    <div>
+      <section>
+        <form class="automaton-form">
+          <label>
+            Automaton variant
+            <select name="variant">
+              <option value="default">Default</option>
+              <option value="noisy">Noisy</option>
+              <option value="colored">Colored</option>
+            </select>
+          </label>
+          <label>
+            Rule number (between 0 and 256)
+            <input type="number" min="0" max="256" value="150" name="rule">
+          </label>
+          <button type="submit">
+            Update
+          </button>
+        </form>
+      </section>
+      <section>
+        <canvas id="automaton-canvas"></canvas>
+      </section>
+    </div>
   </main>
 </body>
 

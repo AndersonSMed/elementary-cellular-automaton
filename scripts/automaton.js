@@ -1,9 +1,10 @@
 const SQUARE_SIZE = 10;
-const CURRENT_HEURISTIC_NUMBER = 150;
-const SUPPORTED_AUTOMATON_TYPES = new Set(["default"]);
+const SUPPORTED_AUTOMATON_VARIANTS = new Set(["default", "noisy", "colored"]);
 
 let currentGen = new Array(100).fill().map(() => Math.floor(Math.random() * 2));
-let currentAutomatonType = "default";
+let currentAutomatonVariant = "default";
+let currentAutomatonRule = 150;
+let currentLine = 1;
 
 function setup() {
   const existingCanvas = document.querySelector("#automaton-canvas");
@@ -13,10 +14,29 @@ function setup() {
 
 function draw() {
   currentGen.forEach((value, index) => {
-    const currentColor = color(256 * value);
+    let currentColor;
+
+    switch (currentAutomatonVariant) {
+      case "default":
+        currentColor = color(256 * value);
+        break;
+      case "noisy":
+        currentColor = color(buildRandomColorFromValue(value));
+        break;
+      case "colored":
+        currentColor = color(
+          buildRandomColorFromValue(value),
+          buildRandomColorFromValue(value),
+          buildRandomColorFromValue(value)
+        );
+        break;
+    }
+
     fill(currentColor);
+
     noStroke();
-    square(SQUARE_SIZE * index, SQUARE_SIZE * (frameCount - 1), SQUARE_SIZE);
+
+    square(SQUARE_SIZE * index, SQUARE_SIZE * (currentLine - 1), SQUARE_SIZE);
   });
 
   currentGen = currentGen.map((_, index) =>
@@ -26,21 +46,24 @@ function draw() {
       currentGen[(index + 1) % currentGen.length]
     )
   );
+
+  currentLine += 1;
 }
 
 function buildValueFromNeighborhood(a, b, c) {
-  const heuristicInBinary = CURRENT_HEURISTIC_NUMBER.toString(2).padStart(
-    8,
-    "0"
-  );
+  const heuristicInBinary = currentAutomatonRule.toString(2).padStart(8, "0");
   const position = heuristicInBinary.length - parseInt(`${a}${b}${c}`, 2) - 1;
   return parseInt(heuristicInBinary[position]);
 }
 
-function changeAutomatonType(newValue) {
-  if (!SUPPORTED_AUTOMATON_TYPES.has(newValue)) {
-    throw new Error(`Invalid automaton type: ${newValue}`);
+function changeAutomatonVariantAndRule({ variant, rule }) {
+  if (!SUPPORTED_AUTOMATON_VARIANTS.has(variant)) {
+    throw new Error(`Invalid automaton variant: ${variant}`);
   }
 
-  currentAutomatonType = newValue;
+  currentAutomatonVariant = variant;
+  currentAutomatonRule = parseInt(rule);
+  currentLine = 1;
+
+  clear();
 }

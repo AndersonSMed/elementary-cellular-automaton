@@ -9,3 +9,26 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.main {
+  flex-direction: column;
+  align-items: center;
+}
+
+.automaton-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.automaton-form label {
+  font-weight: 100;
+  display: block;
+}
+
+.automaton-form button {
+  max-width: fit-content;
+  padding: 0.3rem 0.6rem;
+  font-weight: 200;
+}
