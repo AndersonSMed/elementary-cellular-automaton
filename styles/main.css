@@ -1,0 +1,11 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #dedede;
+}
+
+.header, .main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
