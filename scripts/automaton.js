@@ -1,18 +1,23 @@
-const SQUARE_SIZE = 10;
 const SUPPORTED_AUTOMATON_VARIANTS = new Set(["default", "noisy", "colored"]);
 
-let currentGen = new Array(100).fill().map(() => Math.floor(Math.random() * 2));
+let squareSize = 10;
+let currentGen = populateNewLine(100);
 let currentAutomatonVariant = "default";
 let currentAutomatonRule = 150;
 let currentLine = 1;
 
 function setup() {
   const existingCanvas = document.querySelector("#automaton-canvas");
-  const canvasSize = currentGen.length * SQUARE_SIZE;
+  const canvasSize = currentGen.length * squareSize;
   createCanvas(canvasSize, canvasSize, existingCanvas);
 }
 
 function draw() {
+  if (currentLine === currentGen.length + 1) {
+    noLoop();
+    return;
+  }
+
   currentGen.forEach((value, index) => {
     let currentColor;
 
@@ -36,7 +41,7 @@ function draw() {
 
     noStroke();
 
-    square(SQUARE_SIZE * index, SQUARE_SIZE * (currentLine - 1), SQUARE_SIZE);
+    square(squareSize * index, squareSize * (currentLine - 1), squareSize);
   });
 
   currentGen = currentGen.map((_, index) =>
@@ -63,7 +68,20 @@ function changeAutomatonVariantAndRule({ variant, rule }) {
 
   currentAutomatonVariant = variant;
   currentAutomatonRule = parseInt(rule);
-  currentLine = 1;
+}
 
+function changeAutomatonElementsPerLine({ elementsPerLine }) {
+  currentGen = populateNewLine(parseInt(elementsPerLine));
+}
+
+function changeAutomatonSquareSize({ newSquareSize }) {
+  squareSize = parseInt(newSquareSize);
+}
+
+function redrawCanvas() {
+  const canvasSize = currentGen.length * squareSize;
+  resizeCanvas(canvasSize, canvasSize);
   clear();
+  currentLine = 1;
+  loop();
 }

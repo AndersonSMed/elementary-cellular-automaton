@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>p5.js example</title>
   <link rel="stylesheet" href="./styles/main.css">
-  <script src="./libs/p5.min.js"></script>
-  <script src="./scripts/automaton.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.js"></script>
   <script src="./scripts/helpers.js"></script>
+  <script src="./scripts/automaton.js"></script>
   <script src="./scripts/selection-form.js" defer></script>
 </head>
 
@@ -33,6 +33,14 @@
           <label>
             Rule number (between 0 and 256)
             <input type="number" min="0" max="256" value="150" name="rule">
+          </label>
+          <label>
+            Square size
+            <input type="number" min="1" value="10" name="square-size">
+          </label>
+          <label>
+            Elements per line
+            <input type="number" min="1" value="100" name="elements-per-line">
           </label>
           <button type="submit">
             Update

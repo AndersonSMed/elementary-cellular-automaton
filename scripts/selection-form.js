@@ -7,6 +7,11 @@ form.addEventListener("submit", (event) => {
 
   const variant = formData.get("variant");
   const rule = formData.get("rule");
+  const elementsPerLine = formData.get("elements-per-line");
+  const squareSize = formData.get("square-size");
 
   changeAutomatonVariantAndRule({ variant, rule });
+  changeAutomatonElementsPerLine({ elementsPerLine });
+  changeAutomatonSquareSize({ newSquareSize: squareSize });
+  redrawCanvas();
 });
