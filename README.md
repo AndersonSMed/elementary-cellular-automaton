@@ -1,4 +1,4 @@
-# elementary-cellular-automaton
+# Elementary Cellular Automaton
 A project was created as a way to visually understand [elementary cellular automatons](https://en.wikipedia.org/wiki/Elementary_cellular_automaton) and how they work
 
 ## Running locally
@@ -6,7 +6,7 @@ To run this project locally is extremely easy, you need to create a simple HTTP 
 
 [Example of how to create a simple server with Python](https://realpython.com/python-http-server/)
 
-Alternatively, you can access the project page
+Alternatively, you can access the project page by opening [this link](https://andersonmedeiros.net/elementary-cellular-automaton/)
 
 ## Parameters
 
